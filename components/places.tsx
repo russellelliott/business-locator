@@ -16,5 +16,16 @@ type PlacesProps = {
 };
 
 export default function Places({ setOffice }: PlacesProps) {
-  return <div>Places</div>;
+  const {
+    ready, 
+    value, 
+    setValue, 
+    suggestions:{status, data}, 
+    clearSuggestions
+  } = usePlacesAutocomplete();
+
+  return <Combobox onSelect={() => {}}>
+    <ComboboxInput value={value} onChange={e => setValue(e.target.value)}
+    className="combobox-input"/>
+  </Combobox>;
 }
