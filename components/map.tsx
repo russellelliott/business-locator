@@ -16,16 +16,22 @@ type MapOptions = google.maps.MapOptions;
 
 //render the map
 export default function Map() {
+  //make a mapRef
+  const mapRef = useRef<GoogleMap>(); //give it a type using "<>", tell it's an instance of GoogleMap
+
   //use same instance of the object to avoid centering issues
   //useMemo; use the same object unless one of the parameters has changed
   //no dependencies (2nd argument); get exact same object every time
-  const center = useMemo(() => ({lat:43, lng: -80}), []);
+  const center = useMemo<LatLngLiteral>(() => ({lat:43, lng: -80}), []);
 
   //implement options for our map
-  const options = useMemo(() => ({
+  const options = useMemo<MapOptions>(() => ({
     disableDefaultUI: true,
     clickableIcons: false
   }), []);
+
+  //populate the mapRef
+  const onLoad = useCallback(map => (mapRef.current = map), []);
   return <div className="container">
     <div className="controls">
       <h1>Commute?</h1>
@@ -36,6 +42,7 @@ export default function Map() {
         center={center}
         mapContainerClassName="map-container"
         options={options}
+        onLoad={onLoad}
       ></GoogleMap>
     </div>
 
