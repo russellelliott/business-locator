@@ -9,5 +9,7 @@ export default function Home() {
 
   //check if the script above has finished loading
   if(!isLoaded) return <div>Loading...</div> //display when the map is loading
-  return <div>Map</div>; //when done loading, display the map
+
+  //when done loading, display the map
+  return <Map/>; //display map component from components folder
 }
