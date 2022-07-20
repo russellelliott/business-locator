@@ -19,13 +19,24 @@ export default function Map() {
   //use same instance of the object to avoid centering issues
   //useMemo; use the same object unless one of the parameters has changed
   //no dependencies (2nd argument); get exact same object every time
-  const center = useMemo(()=>({lat:43, lng: -80}), []);
+  const center = useMemo(() => ({lat:43, lng: -80}), []);
+
+  //implement options for our map
+  const options = useMemo(() => ({
+    disableDefaultUI: true,
+    clickableIcons: false
+  }), []);
   return <div className="container">
     <div className="controls">
       <h1>Commute?</h1>
     </div>
     <div className="map">
-      <GoogleMap zoom={10} center={center} mapContainerClassName="map-container"></GoogleMap>
+      <GoogleMap
+        zoom={10}
+        center={center}
+        mapContainerClassName="map-container"
+        options={options}
+      ></GoogleMap>
     </div>
 
   </div>;
