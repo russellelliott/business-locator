@@ -16,6 +16,9 @@ type MapOptions = google.maps.MapOptions;
 
 //render the map
 export default function Map() {
+  //set up the location of the office
+  const [office, setOffice] = useState<LatLngLiteral>();
+
   //make a mapRef
   const mapRef = useRef<GoogleMap>(); //give it a type using "<>", tell it's an instance of GoogleMap
 
@@ -35,6 +38,10 @@ export default function Map() {
   return <div className="container">
     <div className="controls">
       <h1>Commute?</h1>
+      <Places setOffice={(position) => {
+        setOffice(position);
+        mapRef.current?.panTo(position);
+      }}/>
     </div>
     <div className="map">
       <GoogleMap
