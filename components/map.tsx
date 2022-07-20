@@ -51,7 +51,7 @@ export default function Map() {
         options={options}
         onLoad={onLoad}
       >
-        {office && <Marker position={office}/>}
+        {office && <Marker position={office} icon={"https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"}/>}
       </GoogleMap>
     </div>
 
