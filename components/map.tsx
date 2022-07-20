@@ -35,6 +35,10 @@ export default function Map() {
 
   //populate the mapRef
   const onLoad = useCallback(map => (mapRef.current = map), []);
+
+  //generate the houses from center location
+  //houses regenerate when the center location changes, like when the user moves across the map
+  const houses = useMemo(() => generateHouses(center), [center])
   return <div className="container">
     <div className="controls">
       <h1>Commute?</h1>
@@ -58,6 +62,9 @@ export default function Map() {
             icon={"https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"}
           />
 
+          {houses.map((house) => (
+            <Marker key={house.lat} position={house}/>
+          ))}
           <Circle center = {office} radius={15000} options={closeOptions}/>
           <Circle center = {office} radius={30000} options={middleOptions}/>
           <Circle center = {office} radius={45000} options={farOptions}/>
