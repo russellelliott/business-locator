@@ -31,12 +31,6 @@ export default function Map() {
     []
   );
 
-  //HARDCODED nearest location
-  const nearest = useMemo<LatLngLiteral>(
-    () => ({ lat: 43.47, lng: -80.43 }),
-    []
-  );
-
   const options = useMemo<MapOptions>(
     () => ({
       disableDefaultUI: true,
@@ -91,6 +85,7 @@ export default function Map() {
   }
 
   function getMiles(office: any, lat: any, lng: any){
+    //distance from office to a given location in miles
     var distLat = 69; //distance of one degree of latitude in miles
     var distLng = 54.6; //distance of one degree of latitude in miles
     var diffLat = (lat - office.lat)*distLat;
@@ -100,6 +95,10 @@ export default function Map() {
     return distance;
   }
   function getNearest(){
+    if(!office){
+      toast.error("Office not set.")
+      return;
+    }
     var minDistance = Infinity; //max positive number in javascript
     if(!office){ //need office location to get nearest location
       toast.error("No locations available. Please select your location in the searchbox.");
@@ -124,21 +123,19 @@ export default function Map() {
   }
 
   function goToNearest(){
+    if(!office){
+      toast.error("Office not set.")
+      return;
+    }
     toast.info("Here is the closest business to your location.")
-    //TODO: figure out way to get the locations of the markers on the map and find the closest one to the user
-    //For now, user sets their "office", and markers are generated around that
-
-    //the location of the nearest business will be stored in a variable called "nearest"
-    //hardcoding this for now
-    /*const nearest = useMemo<LatLngLiteral>(
-      () => ({ lat: 45, lng: -81 }),
-      []
-    );*/
-
-    //pan to the nearest business
-    //somehow import data here?
-
-    mapRef.current?.panTo(nearest); //pan to location
+    var minDistance = getNearest();
+    houses.forEach(function (value){
+      //find house with correct distance
+      var distance = getMiles(office, value.lat, value.lng);
+      if(distance == minDistance){
+        mapRef.current?.panTo(value); //pan to nearest business
+      }
+    });
     
   }
 
