@@ -120,6 +120,7 @@ export default function Map() {
       <div>
         <Component/>
         <ToastContainer />
+        {center.lat},{center.lng}
       </div>
       <div className="map">
         <GoogleMap
