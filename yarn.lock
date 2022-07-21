@@ -1520,7 +1520,7 @@
   dependencies:
     "clsx" "^1.1.1"
 
-"react@^16.6.3 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || 17.x", "react@^17.0.2 || ^18.0.0-0", "react@>= 16.8.0", "react@>= 16.8.0 || 17.x.x || 18.x.x", "react@>=16", "react@>=16.8.0", "react@17.0.2":
+"react@^16.6.3 || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || 17.x", "react@^17.0.2 || ^18.0.0-0", "react@>= 16.8.0", "react@>= 16.8.0 || 17.x.x || 18.x.x", "react@>=16", "react@>=16.8.0", "react@>=16.9.0", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -1808,6 +1808,11 @@
   "version" "1.5.1"
   dependencies:
     "object-assign" "^4.1.1"
+
+"usehooks-ts@^2.6.0":
+  "integrity" "sha512-Kj/4oc2nOxRDGTDb2v1ZulF7+tpeXFuqI6cUesM0Vic7TPPDlFORxKh4ivsYg+NTvX/YbM+lhqqkfFTiIt23eg=="
+  "resolved" "https://registry.npmjs.org/usehooks-ts/-/usehooks-ts-2.6.0.tgz"
+  "version" "2.6.0"
 
 "v8-compile-cache@^2.0.3":
   "integrity" "sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA=="

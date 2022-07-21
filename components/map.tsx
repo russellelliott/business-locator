@@ -1,4 +1,53 @@
 import { useState, useMemo, useCallback, useRef } from "react";
+import React, { ChangeEvent} from 'react'
+
+import { useInterval } from 'usehooks-ts'
+
+
+export function Component() {
+  // The counter
+  const [count, setCount] = useState<number>(0)
+  // Dynamic delay
+  const [delay, setDelay] = useState<number>(1000)
+  // ON/OFF
+  const [isPlaying, setPlaying] = useState<boolean>(false)
+
+  useInterval(
+    () => {
+      // Your custom logic here
+      setCount(count + 1)
+    },
+    // Delay in milliseconds or null to stop it
+    isPlaying ? delay : null,
+  )
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setDelay(Number(event.target.value))
+  }
+
+  return (
+    <>
+      <h1>{count}</h1>
+      <button onClick={() => setPlaying(!isPlaying)}>
+        {isPlaying ? 'pause' : 'play'}
+      </button>
+      <p>
+        <label htmlFor="delay">Delay: </label>
+        <input
+          type="number"
+          name="delay"
+          onChange={handleChange}
+          value={delay}
+        />
+      </p>
+    </>
+  )
+}
+
+
+
+
+
 import {
   GoogleMap,
   Marker,
@@ -61,6 +110,9 @@ export default function Map() {
         />
         {!office && <p>Enter the address of your office.</p>}
         {directions && <Distance leg={directions.routes[0].legs[0]} />}
+      </div>
+      <div>
+        <Component/>
       </div>
       <div className="map">
         <GoogleMap
