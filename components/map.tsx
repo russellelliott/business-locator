@@ -79,7 +79,8 @@ export default function Map() {
       //display message with toast
       //toast.success("Success");
       //toast.warn("This is your final warning");
-      getNearest(); //get nearest business
+      var distance = getNearest(); //get nearest business
+      toast(distance);
     },
     // Delay in milliseconds or null to stop it
     isPlaying ? delay : null,
@@ -90,14 +91,24 @@ export default function Map() {
   }
 
   function getNearest(){
+    var minDistance = Infinity; //max positive number in javascript
     if(!office){ //need office location to get nearest location
       toast.error("No locations available. Please select your location in the searchbox.");
     }else{
       toast.success("Locations available!");
       houses.forEach(function (value){
         //toast(value.lat); //iterate through all the houses
+        //find the closest by comparing latitiude and longitude to that of the user's location
+        var diffLat = value.lat - office.lat;
+        var diffLng = value.lng - office.lng;
+        //pythagorean theorem
+        var distance = Math.sqrt(Math.pow(diffLat, 2)+Math.pow(diffLng, 2)); //smallest distance = closest
+        if(distance < minDistance){
+          minDistance = distance; //set min distance
+        }
       });
     }
+    return minDistance; //return the minimum distance, whatever that may be.
   }
 
   function goToNearest(){
