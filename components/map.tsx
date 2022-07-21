@@ -86,7 +86,7 @@ export default function Map() {
 
   //HARDCODED nearest location
   const nearest = useMemo<LatLngLiteral>(
-    () => ({ lat: 44, lng: -81 }),
+    () => ({ lat: 43.47, lng: -80.43 }),
     []
   );
 
