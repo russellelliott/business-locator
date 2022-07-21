@@ -91,9 +91,12 @@ export default function Map() {
 
   function getNearest(){
     if(!houses){
-      toast.error("No locations available");
+      toast.error("No locations available. Please select your location in the searchbox.");
     }else{
-      toast.success("Locations available!")
+      toast.success("Locations available!");
+      houses.forEach(function (value){
+        //toast(value.lat); //iterate through all the houses
+      });
     }
   }
 
