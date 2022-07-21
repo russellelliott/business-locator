@@ -80,7 +80,7 @@ export default function Map() {
       //toast.success("Success");
       //toast.warn("This is your final warning");
       var distance = getNearest(); //get nearest business
-      toast(distance);
+      toast("The nearest marker to you is " + distance + " miles away.");
     },
     // Delay in milliseconds or null to stop it
     isPlaying ? delay : null,
@@ -99,8 +99,10 @@ export default function Map() {
       houses.forEach(function (value){
         //toast(value.lat); //iterate through all the houses
         //find the closest by comparing latitiude and longitude to that of the user's location
-        var diffLat = value.lat - office.lat;
-        var diffLng = value.lng - office.lng;
+        var distLat = 69; //distance of one degree of latitude in miles
+        var distLng = 54.6; //distance of one degree of latitude in miles
+        var diffLat = (value.lat - office.lat)*distLat;
+        var diffLng = (value.lng - office.lng)*distLng;
         //pythagorean theorem
         var distance = Math.sqrt(Math.pow(diffLat, 2)+Math.pow(diffLng, 2)); //smallest distance = closest
         if(distance < minDistance){
