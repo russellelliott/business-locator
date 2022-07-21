@@ -7,6 +7,10 @@ import React, { ChangeEvent} from 'react' //for timer/controller
 
 import { useInterval } from 'usehooks-ts' //for the timer/counter
 
+function pan(){
+  alert("button pressed!")
+
+}
 export function Component() {
   // The counter
   const [count, setCount] = useState<number>(0)
@@ -46,6 +50,8 @@ export function Component() {
           value={delay}
         />
       </p>
+
+      <button onClick={pan}>Nearest Business</button>
     </>
   )
 }
@@ -60,6 +66,7 @@ import {
   DirectionsRenderer,
   Circle,
   MarkerClusterer,
+  GoogleMarkerClusterer,
 } from "@react-google-maps/api";
 import Places from "./places";
 import Distance from "./distance";
