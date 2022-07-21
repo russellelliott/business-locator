@@ -90,7 +90,7 @@ export default function Map() {
   }
 
   function getNearest(){
-    if(!houses){
+    if(!office){ //need office location to get nearest location
       toast.error("No locations available. Please select your location in the searchbox.");
     }else{
       toast.success("Locations available!");
