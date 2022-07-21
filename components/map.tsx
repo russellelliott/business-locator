@@ -7,10 +7,6 @@ import React, { ChangeEvent} from 'react' //for timer/controller
 
 import { useInterval } from 'usehooks-ts' //for the timer/counter
 
-function pan(){
-  alert("button pressed!")
-
-}
 export function Component() {
   // The counter
   const [count, setCount] = useState<number>(0)
@@ -34,6 +30,12 @@ export function Component() {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setDelay(Number(event.target.value))
   }
+
+  function pan(){
+    alert("panning...")
+  }
+
+  
 
   return (
     <>
