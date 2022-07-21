@@ -77,8 +77,9 @@ export default function Map() {
       // Your custom logic here
       setCount(count + 1)
       //display message with toast
-      toast.success("Success");
-      toast.warn("This is your final warning");
+      //toast.success("Success");
+      //toast.warn("This is your final warning");
+      getNearest(); //get nearest business
     },
     // Delay in milliseconds or null to stop it
     isPlaying ? delay : null,
@@ -86,6 +87,14 @@ export default function Map() {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setDelay(Number(event.target.value))
+  }
+
+  function getNearest(){
+    if(!houses){
+      toast.error("No locations available");
+    }else{
+      toast.success("Locations available!")
+    }
   }
 
   function goToNearest(){
