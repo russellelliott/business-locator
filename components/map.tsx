@@ -90,6 +90,15 @@ export default function Map() {
     setDelay(Number(event.target.value))
   }
 
+  function getMiles(office: any, lat: any, lng: any){
+    var distLat = 69; //distance of one degree of latitude in miles
+    var distLng = 54.6; //distance of one degree of latitude in miles
+    var diffLat = (lat - office.lat)*distLat;
+    var diffLng = (lng - office.lng)*distLng;
+    //pythagorean theorem
+    var distance = Math.sqrt(Math.pow(diffLat, 2)+Math.pow(diffLng, 2)); //smallest distance = closest
+    return distance;
+  }
   function getNearest(){
     var minDistance = Infinity; //max positive number in javascript
     if(!office){ //need office location to get nearest location
@@ -99,12 +108,13 @@ export default function Map() {
       houses.forEach(function (value){
         //toast(value.lat); //iterate through all the houses
         //find the closest by comparing latitiude and longitude to that of the user's location
-        var distLat = 69; //distance of one degree of latitude in miles
+        /*var distLat = 69; //distance of one degree of latitude in miles
         var distLng = 54.6; //distance of one degree of latitude in miles
         var diffLat = (value.lat - office.lat)*distLat;
         var diffLng = (value.lng - office.lng)*distLng;
         //pythagorean theorem
-        var distance = Math.sqrt(Math.pow(diffLat, 2)+Math.pow(diffLng, 2)); //smallest distance = closest
+        var distance = Math.sqrt(Math.pow(diffLat, 2)+Math.pow(diffLng, 2)); //smallest distance = closest*/
+        var distance = getMiles(office, value.lat, value.lng);
         if(distance < minDistance){
           minDistance = distance; //set min distance
         }
