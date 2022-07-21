@@ -7,59 +7,6 @@ import React, { ChangeEvent} from 'react' //for timer/controller
 
 import { useInterval } from 'usehooks-ts' //for the timer/counter
 
-export function Component() {
-
-  const mapRef = useRef<GoogleMap>(); //this statement is in the maps component
-
-  
-  // The counter
-  const [count, setCount] = useState<number>(0)
-  // Dynamic delay
-  const [delay, setDelay] = useState<number>(1000)
-  // ON/OFF
-  const [isPlaying, setPlaying] = useState<boolean>(false)
-
-  useInterval(
-    () => {
-      // Your custom logic here
-      setCount(count + 1)
-      //display message with toast
-      toast.success("Success");
-      toast.warn("This is your final warning");
-    },
-    // Delay in milliseconds or null to stop it
-    isPlaying ? delay : null,
-  )
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setDelay(Number(event.target.value))
-  }
-
-  
-
-  return (
-    <>
-      <h1>{count}</h1>
-      <button onClick={() => setPlaying(!isPlaying)}>
-        {isPlaying ? 'pause' : 'play'}
-      </button>
-      <p>
-        <label htmlFor="delay">Delay: </label>
-        <input
-          type="number"
-          name="delay"
-          onChange={handleChange}
-          value={delay}
-        />
-      </p>
-    </>
-  )
-}
-
-
-
-
-
 import {
   GoogleMap,
   Marker,
@@ -118,6 +65,29 @@ export default function Map() {
     );
   };
 
+  // The counter
+  const [count, setCount] = useState<number>(0)
+  // Dynamic delay
+  const [delay, setDelay] = useState<number>(1000)
+  // ON/OFF
+  const [isPlaying, setPlaying] = useState<boolean>(false)
+
+  useInterval(
+    () => {
+      // Your custom logic here
+      setCount(count + 1)
+      //display message with toast
+      toast.success("Success");
+      toast.warn("This is your final warning");
+    },
+    // Delay in milliseconds or null to stop it
+    isPlaying ? delay : null,
+  )
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setDelay(Number(event.target.value))
+  }
+
   function goToNearest(){
     toast.info("Here is the closest business to your location.")
     //TODO: figure out way to get the locations of the markers on the map and find the closest one to the user
@@ -151,7 +121,19 @@ export default function Map() {
         {directions && <Distance leg={directions.routes[0].legs[0]} />}
       </div>
       <div>
-        <Component/>
+        <h1>{count}</h1>
+        <button onClick={() => setPlaying(!isPlaying)}>
+          {isPlaying ? 'pause' : 'play'}
+        </button>
+        <p>
+          <label htmlFor="delay">Delay: </label>
+          <input
+            type="number"
+            name="delay"
+            onChange={handleChange}
+            value={delay}
+          />
+        </p>
         <ToastContainer />
         {center.lat},{center.lng}
         <button onClick={goToNearest}>Go To Nearest Business</button>
