@@ -11,11 +11,7 @@ export function Component() {
 
   const mapRef = useRef<GoogleMap>(); //this statement is in the maps component
 
-  //HARDCODED nearest location
-  const nearest = useMemo<LatLngLiteral>(
-    () => ({ lat: 50, lng: -90 }),
-    []
-  );
+  
   // The counter
   const [count, setCount] = useState<number>(0)
   // Dynamic delay
@@ -39,25 +35,6 @@ export function Component() {
     setDelay(Number(event.target.value))
   }
 
-  function goToNearest(){
-    toast.info("Here is the closest business to your location.")
-    //TODO: figure out way to get the locations of the markers on the map and find the closest one to the user
-    //For now, user sets their "office", and markers are generated around that
-
-    //the location of the nearest business will be stored in a variable called "nearest"
-    //hardcoding this for now
-    /*const nearest = useMemo<LatLngLiteral>(
-      () => ({ lat: 45, lng: -81 }),
-      []
-    );*/
-
-    //pan to the nearest business
-    //somehow import data here?
-
-    mapRef.current?.panTo(nearest); //pan to location
-    
-  }
-
   
 
   return (
@@ -75,8 +52,6 @@ export function Component() {
           value={delay}
         />
       </p>
-
-      <button onClick={goToNearest}>Go To Nearest Business</button>
     </>
   )
 }
@@ -108,6 +83,13 @@ export default function Map() {
     () => ({ lat: 43.45, lng: -80.49 }),
     []
   );
+
+  //HARDCODED nearest location
+  const nearest = useMemo<LatLngLiteral>(
+    () => ({ lat: 44, lng: -81 }),
+    []
+  );
+
   const options = useMemo<MapOptions>(
     () => ({
       disableDefaultUI: true,
@@ -136,6 +118,25 @@ export default function Map() {
     );
   };
 
+  function goToNearest(){
+    toast.info("Here is the closest business to your location.")
+    //TODO: figure out way to get the locations of the markers on the map and find the closest one to the user
+    //For now, user sets their "office", and markers are generated around that
+
+    //the location of the nearest business will be stored in a variable called "nearest"
+    //hardcoding this for now
+    /*const nearest = useMemo<LatLngLiteral>(
+      () => ({ lat: 45, lng: -81 }),
+      []
+    );*/
+
+    //pan to the nearest business
+    //somehow import data here?
+
+    mapRef.current?.panTo(nearest); //pan to location
+    
+  }
+
   return (
     <div className="container">
       <div className="controls">
@@ -153,6 +154,7 @@ export default function Map() {
         <Component/>
         <ToastContainer />
         {center.lat},{center.lng}
+        <button onClick={goToNearest}>Go To Nearest Business</button>
       </div>
       <div className="map">
         <GoogleMap
