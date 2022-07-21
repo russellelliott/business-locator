@@ -1,8 +1,11 @@
 import { useState, useMemo, useCallback, useRef } from "react";
-import React, { ChangeEvent} from 'react'
 
-import { useInterval } from 'usehooks-ts'
+import { toast, ToastContainer } from 'react-toastify'; //for notification
+import 'react-toastify/dist/ReactToastify.css'; //for notification
 
+import React, { ChangeEvent} from 'react' //for timer/controller
+
+import { useInterval } from 'usehooks-ts' //for the timer/counter
 
 export function Component() {
   // The counter
@@ -16,6 +19,7 @@ export function Component() {
     () => {
       // Your custom logic here
       setCount(count + 1)
+      toast("Test message");
     },
     // Delay in milliseconds or null to stop it
     isPlaying ? delay : null,
@@ -113,6 +117,7 @@ export default function Map() {
       </div>
       <div>
         <Component/>
+        <ToastContainer />
       </div>
       <div className="map">
         <GoogleMap
