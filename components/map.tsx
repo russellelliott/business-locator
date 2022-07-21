@@ -19,7 +19,9 @@ export function Component() {
     () => {
       // Your custom logic here
       setCount(count + 1)
-      toast("Test message");
+      //display message with toast
+      toast.success("Success");
+      toast.warn("This is your final warning");
     },
     // Delay in milliseconds or null to stop it
     isPlaying ? delay : null,
