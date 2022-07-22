@@ -61,8 +61,8 @@ export default function Map() {
 
   // The counter
   const [count, setCount] = useState<number>(0)
-  // Dynamic delay
-  const [delay, setDelay] = useState<number>(1000)
+  // Dynamic delay (user inputs seconds; converted to miliseconds)
+  const [delay, setDelay] = useState<number>(5)
   // ON/OFF
   const [isPlaying, setPlaying] = useState<boolean>(false)
 
@@ -74,10 +74,14 @@ export default function Map() {
       //toast.success("Success");
       //toast.warn("This is your final warning");
       var distance = getNearest(); //get nearest business
-      toast("The nearest marker to you is " + distance + " miles away.");
+      if(office){
+        //display distance only if office exists. if not, distance is undefined
+        toast.info("The nearest marker to you is " + distance?.toFixed(1) + " km away.");
+      }
     },
     // Delay in milliseconds or null to stop it
-    isPlaying ? delay : null,
+    //multiply by 1000; user inputs it as seconds
+    isPlaying ? delay*1000 : null,
   )
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -92,7 +96,7 @@ export default function Map() {
     var diffLng = (lng - office.lng)*distLng;
     //pythagorean theorem
     var distance = Math.sqrt(Math.pow(diffLat, 2)+Math.pow(diffLng, 2)); //smallest distance = closest
-    return distance;
+    return distance*1.60934; //convert to km because distance component is in km
   }
   function getNearest(){
     if(!office){
@@ -153,9 +157,9 @@ export default function Map() {
         {directions && <Distance leg={directions.routes[0].legs[0]} />}
       </div>
       <div>
-        <h1>{count}</h1>
+        <h1>Fetch Data</h1>
         <button onClick={() => setPlaying(!isPlaying)}>
-          {isPlaying ? 'pause' : 'play'}
+          {isPlaying ? 'Stop' : 'Start'}
         </button>
         <p>
           <label htmlFor="delay">Delay: </label>
@@ -167,7 +171,6 @@ export default function Map() {
           />
         </p>
         <ToastContainer />
-        {center.lat},{center.lng}
         <button onClick={goToNearest}>Go To Nearest Business</button>
       </div>
       <div className="map">
